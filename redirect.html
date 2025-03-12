@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="redirect.css">
+    <title>System Check</title>
+    <script>
+        async function getSystemInfo() {
+            let infoContainer = document.getElementById("info");
+            let messages = [
+                "Checking operating system version...",
+                "Checking CPU usage...",
+                "Checking GPU usage...",
+                "Checking RAM usage...",
+                "Initializing software...",
+                "What's new in V-POS 2.0:\n1. New UI design\n2. Improved performance\n3. Added new inventory management features\n4. chat support",
+                "Welcome to the V-POS 2.0 system"
+            ];
+            
+            let index = 0;
+            function updateInfo() {
+                if (index < messages.length) {
+                    infoContainer.textContent = messages[index];
+                    infoContainer.classList.remove("fade-in");
+                    void infoContainer.offsetWidth; // Trigger reflow to restart animation
+                    infoContainer.classList.add("fade-in");
+                    index++;
+                    setTimeout(updateInfo, 4000);
+                } else {
+                    window.location.href = 'pos.html';
+                }
+            }
+            
+            updateInfo();
+        }
+        window.onload = getSystemInfo;
+    </script>
+    <style>
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome to the V Eco-system v2.0</h2>
+    <div id="info" class="fade-in"></div>
+</body>
+</html>
